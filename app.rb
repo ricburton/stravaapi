@@ -9,7 +9,7 @@ module StravaAPI
       content_type :json
       begin
         doc = Nokogiri::HTML(open("http://www.strava.com/athletes/#{params[:athlete_id]}"))
-      rescue => e
+      rescue
         return 'Incorrect Athlete ID.'.to_json
       end
 
@@ -24,8 +24,8 @@ module StravaAPI
       formatted_stats = {total_distance_cycling: stats[0],
                          total_time_cycling:     stats[1],
                          total_rides:            stats[2],
-                         total_distance_ran:     stats[3],
-                         total_time_runnig:      stats[4],
+                         total_distance_running: stats[3],
+                         total_time_running:     stats[4],
                          total_runs:             stats[5]}
 
       return formatted_stats.to_json

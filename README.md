@@ -11,8 +11,8 @@ This API receives a request to: http://stravaapi.herokuapp.com/athletedata/:athl
     {"total_distance_cycling" : "49.2",
     "total_time_cycling"      : "4",
     "total_rides"             : "9",
-    "total_distance_ran"      : "195.1",
-    "total_time_runnig"       : "25",
+    "total_distance_running"  : "195.1",
+    "total_time_running"      : "25",
     "total_runs"              : "125"}
 
 ## TODO
