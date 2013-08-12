@@ -1,6 +1,6 @@
 # (Unofficial) Strava API
 
-#### _A tiny Ruby API an athlete's most basic statistics on Strava_
+#### _A tiny Ruby API for an athlete's most basic statistics on Strava_
 
 ## What's it for?
 
