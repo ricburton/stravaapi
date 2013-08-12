@@ -1,34 +1,39 @@
 require 'rubygems'
 require 'bundler'
-require 'open-uri'
+require 'uri'
 Bundler.require
 
 module StravaAPI
   class App < Sinatra::Base
+
+    helpers do
+      def json(value, options = {})
+         content_type :json
+         value.to_json(options)
+       end
+    end
+
     get '/athletedata/:athlete_id' do
-      content_type :json
       begin
-        doc = Nokogiri::HTML(open("http://www.strava.com/athletes/#{params[:athlete_id]}"))
-      rescue
-        return 'Incorrect Athlete ID.'.to_json
+        strava_profile = Nestful.get(URI.join('http://www.strava.com/athletes/', params[:athlete_id]))
+
+        doc = Nokogiri::HTML(strava_profile)
+        stats = []
+        doc.css('div.athlete-stats strong').each do |stat|
+          stats << stat.text.gsub!(/mi|hr|km/,'')
+        end
+
+        formatted_stats = {total_distance_cycling: stats[0],
+                           total_time_cycling:     stats[1],
+                           total_rides:            stats[2],
+                           total_distance_running: stats[3],
+                           total_time_running:     stats[4],
+                           total_runs:             stats[5]}
+
+        json(formatted_stats)
+      rescue Nestful::ResourceNotFound => e
+        halt(422, json({error: 'Incorrect Athlete ID.'}))
       end
-
-      stats = []
-      unit_strings = ['mi','hr','km']
-      doc.css('div.athlete-stats strong').each do |stat|
-        raw_stat = stat.text
-        unit_strings.each{|string| raw_stat.gsub!(string,'')}
-        stats << raw_stat
-      end
-
-      formatted_stats = {total_distance_cycling: stats[0],
-                         total_time_cycling:     stats[1],
-                         total_rides:            stats[2],
-                         total_distance_running: stats[3],
-                         total_time_running:     stats[4],
-                         total_runs:             stats[5]}
-
-      return formatted_stats.to_json
     end
   end
 end
