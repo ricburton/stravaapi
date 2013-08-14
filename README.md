@@ -5,12 +5,21 @@ Like [many others](https://github.com/chocolit/dashboard), I'm interested in the
 
 This API receives a request to: http://stravaapi.herokuapp.com/athletedata/:athlete_id and then returns a response that looks like this:
 
-    {"total_distance_cycling" : "49.2",
-    "total_time_cycling"      : "4",
-    "total_rides"             : "9",
-    "total_distance_running"  : "195.1",
-    "total_time_running"      : "25",
-    "total_runs"              : "125"}
+    {
+    "cycling":{
+      "distance"      : "49.2",
+      "distance_unit" : "mi",
+      "time"          : "4",
+      "time_unit"     : "hr",
+      "rides"         : "9"
+      },
+    "running":{
+      "distance"      : "199.7",
+      "distance_unit" : "mi",
+      "time"          : "26",
+      "time_unit"     : "hr",
+      "rides"         : "128"
+      }
+    }
 
-## TODO
-* Add miles/km to the response.
+You can see what my results look like [here](http://stravaapi.herokuapp.com/athletedata/577065).
