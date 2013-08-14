@@ -12,7 +12,7 @@ module StravaAPI
          value.to_json(options)
       end
 
-      UNITS = /mi|km|hr/
+      UNITS = /mi|km|m|hr/
 
       def measure(raw_stat)
         raw_stat.gsub(UNITS,'')
