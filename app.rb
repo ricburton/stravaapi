@@ -39,7 +39,7 @@ module StravaAPI
                                      distance_unit: unit(stats[3]),
                                      time:          measure(stats[4]),
                                      time_unit:     unit(stats[4]),
-                                     rides:         stats[5]}
+                                     runs:         stats[5]}
                           }
 
         json(formatted_stats)

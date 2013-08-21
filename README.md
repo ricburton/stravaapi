@@ -18,7 +18,7 @@ This API receives a request to: http://stravaapi.herokuapp.com/athletedata/:athl
       "distance_unit" : "mi",
       "time"          : "26",
       "time_unit"     : "hr",
-      "rides"         : "128"
+      "runs"          : "128"
       }
     }
 
